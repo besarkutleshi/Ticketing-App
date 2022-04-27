@@ -12,12 +12,12 @@ router.post('/api/users/signup',
     (req: Request, res: Response) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
-            throw new RequestValidatorError(errors.array());
+            throw new RequestValidatorError(errors.array(), "Invalid email or password!");
         }
 
         const { email, password } = req.body;
         console.log('Creating a user...')
-        throw new DatabaseConnectionError();
+        throw new DatabaseConnectionError("Failed to connect with database!");
         res.send({});
     }
 );
