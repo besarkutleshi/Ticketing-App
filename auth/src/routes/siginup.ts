@@ -15,6 +15,7 @@ router.post('/api/users/signup',
     async (req: Request, res: Response) => {
         const { email, password } = req.body;
         const existingUser = await User.findOne({ email });
+        
         if(existingUser){
             throw new BadRequestError('Email already exists, please try another email!');
         }
