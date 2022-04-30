@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import { DatabaseConnectionError } from './errors/database-connection';
-import { BadRequestError } from './errors/bad-request-error';
 import { app } from './app';
+const { BadRequestError, DatabaseConnectionError} = require('@bkorg/common');
 
 const start = async () => {
     if(!process.env.JWT_KEY){

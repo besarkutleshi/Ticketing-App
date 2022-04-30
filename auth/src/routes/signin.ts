@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import { body } from 'express-validator';
-import { BadRequestError } from '../errors/bad-request-error';
-import { validateRequest } from '../middlewares/validate-request';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken'
+
+const { BadRequestError, validateRequest } = require('@bkorg/common');
 const router = express.Router();
 
 router.post('/api/users/signin',
@@ -23,13 +23,12 @@ router.post('/api/users/signin',
             id: existsUser.id,
             email: existsUser.email
         }, process.env.JWT_KEY!);
-        console.log(userJwt);
         
+        req.session = {
+            jwt: userJwt
+        };
         
-        return res.status(200).cookie('token', userJwt, {
-            httpOnly: true,
-            secure: true
-        }).send(existsUser);
+        return res.status(200).send(existsUser);
     }
 );
 

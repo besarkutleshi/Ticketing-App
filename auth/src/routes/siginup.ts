@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express'
 import { body } from 'express-validator';
-import { BadRequestError } from '../errors/bad-request-error';
+import { BadRequestError } from '../../../common/src/errors/bad-request-error';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken'
-import { validateRequest } from '../middlewares/validate-request';
+
+const validateRequest = require('@bkorg/common');
 const router = express.Router();
 
 router.post('/api/users/signup', 
