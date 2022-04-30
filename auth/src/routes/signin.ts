@@ -23,10 +23,13 @@ router.post('/api/users/signin',
             id: existsUser.id,
             email: existsUser.email
         }, process.env.JWT_KEY!);
-        req.session = {
-            jwt: userJwt
-        };
-        return res.status(200).send(existsUser);
+        console.log(userJwt);
+        
+        
+        return res.status(200).cookie('token', userJwt, {
+            httpOnly: true,
+            secure: true
+        }).send(existsUser);
     }
 );
 
