@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useRequest from "../../hooks/use-request";
 import Router from 'next/router'
-import requireAuth from "../../helper/require-auth";
 
 const signUp = () => {
     const [email, setEmail] = useState('');
@@ -41,6 +40,6 @@ const signUp = () => {
     )
 }
 
-requireAuth(signUp);
+// requireAuth(signUp);
 
 export default signUp;

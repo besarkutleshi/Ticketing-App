@@ -1,6 +1,5 @@
 import Router from 'next/router'
 import buildClient from '../api/build-client'
-import jwt from 'jsonwebtoken'
 const requireAuth = (page, roles = []) => {
     // make sure this function is safe run several times
     if (page.__authIsRequired) {
@@ -29,12 +28,6 @@ const requireAuth = (page, roles = []) => {
                 await Router.push(loginUrl)
             }
             return {}
-        }
-        else{
-            console.log(req);
-            // const token = req.cookies.session;
-            // const jwtDecoded = jwt.decode(token.toString().trim(), { header: true});
-            // console.log(jwtDecoded);
         }
         return originalGetInitialProps ? originalGetInitialProps(ctx) : {}
     }

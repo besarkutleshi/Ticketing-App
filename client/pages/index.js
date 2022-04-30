@@ -7,7 +7,6 @@ const LandingPage = ({ currentUser }) => {
 LandingPage.getInitialProps = async (context) => {
     const clinet = buildClient(context);
     const { data } = await clinet.get('/api/users/currentuser');
-    console.log(data);
     return data;
 }
 

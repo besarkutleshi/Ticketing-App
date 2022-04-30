@@ -1,10 +1,9 @@
 import express, { Request, Response } from 'express'
 import { body } from 'express-validator';
-import { BadRequestError } from '../../../common/src/errors/bad-request-error';
+import { BadRequestError, validateRequest } from '@bkorg/common';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken'
 
-const validateRequest = require('@bkorg/common');
 const router = express.Router();
 
 router.post('/api/users/signup', 

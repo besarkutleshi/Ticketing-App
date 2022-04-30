@@ -2,8 +2,7 @@ import express, { Request, Response } from 'express'
 import { body } from 'express-validator';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken'
-
-const { BadRequestError, validateRequest } = require('@bkorg/common');
+import { BadRequestError, validateRequest } from '@bkorg/common';
 const router = express.Router();
 
 router.post('/api/users/signin',

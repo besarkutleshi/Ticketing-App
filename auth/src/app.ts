@@ -5,11 +5,8 @@ import { currentUserRouter } from './routes/current-user';
 import { signInRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/siginup';
-// import { errorHandler } from '../../common/src/middlewares/error.handler';
-// import { NotFoundError } from '../../common/src/errors/not-found-error';
 import cookieSession from 'cookie-session';
-
-const { errorHandler, NotFoundError } = require('@bkorg/common');
+import { errorHandler, NotFoundError } from '@bkorg/common';
 
 const app = express();
 app.set('trust proxy', true);
