@@ -7,7 +7,8 @@ import {
   NotAuthorizedError,
   requireAuth,
 } from '@bkorg/common';
-
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 const router = express.Router();
 
 router.put(
@@ -29,9 +30,20 @@ router.put(
 
     if (ticket.userId !== req.currentUser?.id) throw new NotAuthorizedError('');
 
-    const update = await Ticket.updateOne({ id: id }, { title, price });
+    ticket.set({
+      title: title,
+      price: price,
+    });
+    await ticket.save();
 
-    return res.send(update);
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: id,
+      title: title,
+      price: price,
+      userId: ticket.userId,
+    });
+
+    return res.send(ticket);
   }
 );
 
